@@ -20,6 +20,7 @@
         "eslint-plugin-svelte": "^3.12.4",
         "eslint-plugin-unused-imports": "^4.3.0",
         "globals": "^16.4.0",
+        "linkifyjs": "^4.3.2",
         "playwright": "^1.56.1",
         "prettier": "^3.6.2",
         "prettier-plugin-svelte": "^3.4.0",
@@ -36,6 +37,7 @@
         "vitest-browser-svelte": "^2.0.1",
       },
       "peerDependencies": {
+        "linkifyjs": "^4.3.2",
         "svelte": "^5.0.0",
       },
     },
@@ -552,6 +554,8 @@
     "lightningcss-win32-x64-msvc": ["lightningcss-win32-x64-msvc@1.30.2", "", { "os": "win32", "cpu": "x64" }, "sha512-5g1yc73p+iAkid5phb4oVFMB45417DkRevRbt/El/gKXJk4jid+vPFF/AXbxn05Aky8PapwzZrdJShv5C0avjw=="],
 
     "lilconfig": ["lilconfig@2.1.0", "", {}, "sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ=="],
+
+    "linkifyjs": ["linkifyjs@4.3.2", "", {}, "sha512-NT1CJtq3hHIreOianA8aSXn6Cw0JzYOuDQbOrSPe7gqFnCpKP++MQe3ODgO3oh2GJFORkAAdqredOa60z63GbA=="],
 
     "locate-character": ["locate-character@3.0.0", "", {}, "sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA=="],
 

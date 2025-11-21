@@ -1,12 +1,14 @@
 {
 	"name": "linkify-svelte",
 	"version": "0.0.1",
+	"license": "MIT",
+	"description": "A Svelte component wrapper for LinkifyJS that automatically converts URLs, emails, and hashtags in your text into clickable links.",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && npm run prepack",
+		"build": "vite build && bun run prepack",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
-		"prepack": "svelte-kit sync && svelte-package && publint",
+		"prepack": "svelte-kit sync && svelte-package -i src/lib/linkify && publint",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
@@ -32,7 +34,8 @@
 		}
 	},
 	"peerDependencies": {
-		"svelte": "^5.0.0"
+		"svelte": "^5.0.0",
+		"linkifyjs": "^4.3.2"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.4.0",
@@ -50,6 +53,7 @@
 		"eslint-plugin-svelte": "^3.12.4",
 		"eslint-plugin-unused-imports": "^4.3.0",
 		"globals": "^16.4.0",
+		"linkifyjs": "^4.3.2",
 		"playwright": "^1.56.1",
 		"prettier": "^3.6.2",
 		"prettier-plugin-svelte": "^3.4.0",
