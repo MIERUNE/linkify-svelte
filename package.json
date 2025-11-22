@@ -1,7 +1,15 @@
 {
 	"name": "linkify-svelte",
-	"version": "0.0.1",
+	"version": "0.0.3",
 	"license": "MIT",
+	"author": {
+		"name": "NEKOYASAN"
+	},
+	"homepage": "https://mierune.github.io/linkify-svelte/",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/MIERUNE/linkify-svelte.git"
+	},
 	"description": "A Svelte component wrapper for LinkifyJS that automatically converts URLs, emails, and hashtags in your text into clickable links.",
 	"scripts": {
 		"dev": "vite dev",
