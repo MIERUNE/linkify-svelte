@@ -1,0 +1,160 @@
+# linkify-svelte
+
+Svelte 5 component for [Linkify](http://linkify.js.org/). Automatically detects URLs, email addresses, and other link types, and renders them as anchor tags.
+
+## Installation
+
+Install from npm
+
+```bash
+npm install linkifyjs linkify-svelte
+```
+
+or with other package managers
+
+```bash
+pnpm add linkifyjs linkify-svelte
+bun add linkifyjs linkify-svelte
+```
+
+## Usage
+
+```svelte
+<script>
+  import Linkify from 'linkify-svelte';
+
+  const content = 'For help with GitHub.com, please email support@github.com';
+</script>
+
+<Linkify text={content} />
+```
+
+This will render:
+
+```html
+For help with <a href="http://github.com">GitHub.com</a>, please email <a href="mailto:support@github.com">support@github.com</a>
+```
+
+## Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `text` | `string` | **Required.** The text content to parse for links |
+| `options` | `Opts` | Linkify options (see [Options documentation](https://linkify.js.org/docs/options.html)) |
+| `render` | `Snippet` | Custom render snippet for link elements |
+
+## Examples
+
+### Basic Usage
+
+```svelte
+<script>
+  import Linkify from 'linkify-svelte';
+</script>
+
+<Linkify text="Check out https://example.com for more info." />
+```
+
+### With Options
+
+```svelte
+<script>
+  import Linkify from 'linkify-svelte';
+
+  const options = {
+    target: '_blank',
+    rel: 'noopener noreferrer',
+    className: 'external-link'
+  };
+</script>
+
+<Linkify text="Visit github.com today!" options={options} />
+```
+
+### Custom Link Rendering
+
+Use the `render` snippet to customize how links are rendered:
+
+```svelte
+<script>
+  import Linkify from 'linkify-svelte';
+</script>
+
+<Linkify text="Contact us at hello@example.com">
+  {#snippet render({ tagName, attributes, content })}
+    <a href={attributes.href} class="custom-link">
+      {content}
+    </a>
+  {/snippet}
+</Linkify>
+```
+
+### With Hashtags and Mentions
+
+Install additional plugins:
+
+```bash
+npm install linkify-plugin-hashtag linkify-plugin-mention
+```
+
+```svelte
+<script>
+  import Linkify from 'linkify-svelte';
+  import 'linkify-plugin-hashtag';
+  import 'linkify-plugin-mention';
+
+  const options = {
+    formatHref: {
+      hashtag: (href) => `https://twitter.com/hashtag/${href.substring(1)}`,
+      mention: (href) => `https://twitter.com${href}`
+    }
+  };
+</script>
+
+<Linkify
+  text="Follow @anthropic and check out #AI"
+  options={options}
+/>
+```
+
+### Newline to Break
+
+Convert newlines to `<br>` tags:
+
+```svelte
+<script>
+  import Linkify from 'linkify-svelte';
+
+  const content = `Line 1
+Line 2
+https://example.com`;
+
+  const options = {
+    nl2br: true
+  };
+</script>
+
+<Linkify text={content} options={options} />
+```
+
+## Options
+
+The `options` prop accepts standard [Linkify options](https://linkify.js.org/docs/options.html) without event:
+
+- `defaultProtocol` - Protocol for URLs without one (default: `'http'`)
+- `target` - Link target attribute (e.g., `'_blank'`)
+- `rel` - Link rel attribute
+- `className` - CSS class for links
+- `nl2br` - Convert newlines to `<br>` tags
+- `truncate` - Truncate long URLs
+- `format` - Custom format function for link text
+- `formatHref` - Custom format function for href
+- `validate` - Validation function to filter links
+- `ignoreTags` - Tags to ignore when parsing
+- `render` - Custom render options per link type
+
+## See Also
+
+- [Linkify Documentation](https://linkify.js.org/)
+- [Linkify Options](https://linkify.js.org/docs/options.html)
+- [Linkify Plugins](https://linkify.js.org/docs/plugin-hashtag.html)
