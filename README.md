@@ -1,58 +1,80 @@
-# Svelte library
+# linkify-svelte
 
-Everything you need to build a Svelte library, powered by [`sv`](https://npmjs.com/package/sv).
+A Svelte 5 component wrapper for [LinkifyJS](https://linkify.js.org/) that automatically converts URLs, emails, and hashtags in your text into clickable links.
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
+This library inspired by [linkify-react](https://linkify.js.org/docs/linkify-react.html)
 
-## Creating a project
+## Installation
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+```bash
+npm install linkify-svelte linkifyjs
+# or
+pnpm add linkify-svelte linkifyjs
+bun add linkify-svelte linkifyjs
 ```
 
-## Developing
+## Usage
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Basic Usage
 
-```sh
-npm run dev
+```svelte
+<script>
+	import Linkify from 'linkify-svelte';
+</script>
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+<Linkify text="Check out https://example.com or email us at hello@example.com" />
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+### With Options
 
-## Building
+You can pass [LinkifyJS options](https://linkify.js.org/docs/options.html) to customize behavior:
 
-To build your library:
+```svelte
+<script>
+	import Linkify from 'linkify-svelte';
+</script>
 
-```sh
-npm pack
+<Linkify
+	text="Visit https://example.com"
+	options={{
+		target: '_blank',
+		rel: 'noopener noreferrer',
+		className: 'my-link-class'
+	}}
+/>
 ```
 
-To create a production version of your showcase app:
+### Custom Rendering
 
-```sh
-npm run build
+Use the `render` snippet for full control over link rendering:
+
+```svelte
+<script>
+	import Linkify from 'linkify-svelte';
+</script>
+
+<Linkify text="Check out https://example.com">
+	{#snippet render({ tagName, attributes, content })}
+		<a {...attributes} class="custom-link">
+			{content}
+		</a>
+	{/snippet}
+</Linkify>
 ```
 
-You can preview the production build with `npm run preview`.
+## Props
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+| Prop      | Type                   | Description                                |
+| --------- | ---------------------- | ------------------------------------------ |
+| `text`    | `string`               | The text to linkify                        |
+| `options` | `Omit<Opts, 'events'>` | LinkifyJS options (optional)               |
+| `render`  | `Snippet`              | Custom render snippet for links (optional) |
 
-## Publishing
+## Requirements
 
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
+- Svelte 5.0.0+
+- LinkifyJS 4.3.2+
 
-To publish your library to [npm](https://www.npmjs.com):
+## License
 
-```sh
-npm publish
-```
+MIT
