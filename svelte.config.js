@@ -26,7 +26,7 @@ const config = {
 	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
 	kit: {
 		adapter: adapter(),
-		alias: { 'linkify-svelte': 'src/lib/index.js' }
+		alias: { 'linkify-svelte': 'src/lib/linkify/index.js' }
 	},
 	extensions: ['.svelte', '.svx']
 };
