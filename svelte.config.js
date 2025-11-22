@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-cloudflare';
+import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { escapeSvelte, mdsvex } from 'mdsvex';
 import { createHighlighter } from 'shiki';
@@ -26,6 +26,9 @@ const config = {
 	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
 	kit: {
 		adapter: adapter(),
+		paths: {
+			base: process.env.GITHUB_ACTIONS === 'true' ? '/linkify-svelte' : ''
+		},
 		alias: { 'linkify-svelte': 'src/lib/linkify/index.js' }
 	},
 	extensions: ['.svelte', '.svx']
